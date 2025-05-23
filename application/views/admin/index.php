@@ -62,9 +62,26 @@
    <!-- Begin Page Content -->
 
 
-   <a class="btn btn-sm btn-primary mr-1" href="<?= base_url("Admin/index_tambah_data/") . $topbar; ?>">Tambah Data Barang <i class="fa-solid fa-cart-plus"></i></a>
-   <a class="btn btn-sm btn-primary mr-1" href="<?= base_url("Admin/index") ?>">Refresh <i class="fas fa-sync"></i></a>
-   <a class="btn btn-sm btn-primary" href="#" onclick="submit()">Submit <i class="fa-solid fa-square-root-variable"></i></a>
+  <a class="btn btn-sm btn-primary mr-1" href="<?= base_url("Admin/index_tambah_data/") . $topbar; ?>">Tambah Data Barang <i class="fa-solid fa-cart-plus"></i></a>
+  <a class="btn btn-sm btn-primary mr-1" href="<?= base_url("Admin/index") ?>">Refresh <i class="fas fa-sync"></i></a>
+  <a class="btn btn-sm btn-primary mr-1" href="#" onclick="submit()">Submit <i class="fa-solid fa-square-root-variable"></i></a>
+  <a class="btn btn-sm btn-danger" href="#" onclick="hapus_semua()">Hapus Semua <i class="fa-solid fa-trash"></i></a>
+  <script>
+    function hapus_semua() {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Yakin ingin menghapus semua barang?',
+        text: 'Tindakan ini tidak dapat dibatalkan!',
+        showDenyButton: true,
+        confirmButtonText: 'Ya, Hapus Semua',
+        denyButtonText: `Batal`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.replace(baseUrl + 'Admin/hapus_semua/barang');
+        }
+      });
+    }
+  </script>
 
    <div class="table-responsive mt-2" style="font-size:12px;">
      <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">

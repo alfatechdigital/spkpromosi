@@ -113,7 +113,25 @@ class Admin extends CI_Controller
       }
     }
   }
-
+  public function hapus_semua($tabel)
+  {
+    if (empty($this->session->userdata('nama'))) {
+      redirect('Autentifikasi/index_login');
+    } else {
+      $this->db->empty_table($tabel);
+      $this->session->set_flashdata('message_hapus', '<div class="alert alert-success" role="alert">Semua data berhasil dihapus!</div>');
+      if ($tabel == 'barang') {
+        $redir = 'index';
+      } elseif ($tabel == 'admin') {
+        $redir = 'index_akun';
+      } elseif ($tabel == 'perhitungan_pm') {
+        $redir = 'index_perhitungan';
+      } else {
+        $redir = '';
+      }
+      redirect(base_url('Admin/' . $redir));
+    }
+  }
   public function json_semua_data()
   {
     $semuaData = $this->M_barang->semuaDataBarang();
