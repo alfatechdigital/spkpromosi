@@ -14,45 +14,71 @@
       </div>
 <!--  -->
 
+<?php
+  $role = $this->session->userdata('role');
+?>
 <!-- Tampilkan Role -->
 <li class="nav-item">
   <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">
     <i class="fa-solid fa-user-shield"></i>
-    <span><b>Role:</b> <?= isset($role) ? htmlspecialchars($role) : 'Unknown'; ?></span>
+    <span><b>Role:</b> <?= htmlspecialchars($role); ?></span>
   </a>
 </li>
-      <!-- Sidebar Menu Items -->
-      <li class="nav-item <?= ($topbar == 'index') ? 'active' : ''; ?>">
-        <a class="nav-link" href="<?= base_url("Admin/index"); ?>">
-          <i class="fa-solid fa-bars"></i>
-          <span><b>DATA PRODUK</b><?= ($topbar == 'index') ? ' <u></u>' : ''; ?></span>
-        </a>
-      </li>
-      <!-- HASIL MENU -->
-      <li class="nav-item <?= ($topbar == 'hasil') ? 'active' : ''; ?>">
-        <a class="nav-link" href="<?= base_url("Admin/index_submit"); ?>">
-          <i class="fa-solid fa-chart-bar"></i>
-          <span><b>PERHITUNGAN</b><?= ($topbar == 'hasil') ? ' <u></u>' : ''; ?></span>
-        </a>
-      </li>
-      <li class="nav-item <?= ($topbar == 'perhitungan') ? 'active' : ''; ?>">
-        <a class="nav-link" href="<?= base_url("Admin/index_perhitungan"); ?>">
-          <i class="fa-solid fa-square-root-variable"></i>
-          <span><b>HASIL PERHITUNGAN</b><?= ($topbar == 'perhitungan') ? ' <u></u>' : ''; ?></span>
-        </a>
-      </li>
-      <li class="nav-item <?= ($topbar == 'akun') ? 'active' : ''; ?>">
-        <a class="nav-link" href="<?= base_url("Admin/index_akun"); ?>">
-          <i class="fa-solid fa-users"></i>
-          <span><b>AKUN</b><?= ($topbar == 'akun') ? ' <u></u>' : ''; ?></span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" onclick="logout()">
-          <i class="fa-solid fa-right-from-bracket"></i>
-          <span><b>LOGOUT</b></span>
-        </a>
-      </li>
+
+<!-- DATA PRODUK & AKUN hanya untuk admin -->
+<?php if ($role == 'admin'): ?>
+  <li class="nav-item <?= ($topbar == 'index') ? 'active' : ''; ?>">
+    <a class="nav-link" href="<?= base_url("Admin/index"); ?>">
+      <i class="fa-solid fa-bars"></i>
+      <span><b>DATA PRODUK</b></span>
+    </a>
+  </li>
+  <li class="nav-item <?= ($topbar == 'akun') ? 'active' : ''; ?>">
+    <a class="nav-link" href="<?= base_url("Admin/index_akun"); ?>">
+      <i class="fa-solid fa-users"></i>
+      <span><b>AKUN</b></span>
+    </a>
+  </li>
+<?php endif; ?>
+
+<!-- PERHITUNGAN & HASIL untuk admin dan manager -->
+<?php if ($role == 'admin' || $role == 'manager'): ?>
+  <li class="nav-item <?= ($topbar == 'hasil') ? 'active' : ''; ?>">
+    <a class="nav-link" href="<?= base_url("Admin/index_submit"); ?>">
+      <i class="fa-solid fa-chart-bar"></i>
+      <span><b>PERHITUNGAN</b></span>
+    </a>
+  </li>
+  <li class="nav-item <?= ($topbar == 'perhitungan') ? 'active' : ''; ?>">
+    <a class="nav-link" href="<?= base_url("Admin/index_perhitungan"); ?>">
+      <i class="fa-solid fa-square-root-variable"></i>
+      <span><b>HASIL PERHITUNGAN</b></span>
+    </a>
+  </li>
+<?php endif; ?>
+
+<!-- Contoh: PO hanya menu tertentu -->
+<?php if ($role == 'user'): ?>
+   <li class="nav-item <?= ($topbar == 'index') ? 'active' : ''; ?>">
+    <a class="nav-link" href="<?= base_url("Admin/index_produk"); ?>">
+      <i class="fa-solid fa-bars"></i>
+      <span><b>DATA PRODUK</b></span>
+    </a>
+  </li>
+  <li class="nav-item <?= ($topbar == 'perhitungan') ? 'active' : ''; ?>">
+    <a class="nav-link" href="<?= base_url("Admin/index_perhitungan"); ?>">
+      <i class="fa-solid fa-square-root-variable"></i>
+      <span><b>HASIL PERHITUNGAN</b></span>
+    </a>
+  </li>
+<?php endif; ?>
+
+<li class="nav-item">
+  <a class="nav-link" href="#" onclick="logout()">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    <span><b>LOGOUT</b></span>
+  </a>
+</li>
 
 
 

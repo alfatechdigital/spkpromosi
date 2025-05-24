@@ -26,29 +26,35 @@ class Autentifikasi extends CI_Controller
 
   //load logika login
   private function _login()
-  {
+{
     $username = $this->input->post('username');
     $password = $this->input->post('password');
     $where = array(
-      'username' => $username,
-      'password' => md5($password)
+        'username' => $username,
+        'password' => md5($password)
     );
 
-    $cek = $this->M_barang->cekLogin("admin", $where)->num_rows();
-    if ($cek > 0) {
-      $data_session = array(
-        'nama' => $username,
-        'status' => "login",
-        'detail_user' => $this->M_barang->getDataRoleUser($username)
-      );
-      $this->session->set_userdata($data_session);
-      redirect(base_url('Admin/index'));
+    // Ambil data user (pastikan method ini mengembalikan data user beserta role)
+    $user = $this->M_barang->getUserWithRole($where); // Buat method ini di model
+
+    if ($user) {
+        $data_session = array(
+            'nama' => $user->username,
+            'status' => "login",
+            'role' => $user->role,
+            'detail_user' => $user
+        );
+        $this->session->set_userdata($data_session);
+
+        // Semua role diarahkan ke halaman Admin/home
+        redirect(base_url('Admin/home'));
     } else {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
             Data tidak sesuai!</div>');
-      redirect(base_url('Autentifikasi/index_login'));
+        redirect(base_url('Autentifikasi/index_login'));
     }
-  }
+}
+
 
   public function logout()
   {

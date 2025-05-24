@@ -333,6 +333,13 @@ class M_barang extends CI_Model
     }
   }
 
+public function getUserWithRole($where)
+{
+    // Ganti 'user' dengan nama tabel user Anda jika berbeda
+    return $this->db->get_where('admin', $where)->row();
+}
+
+
   public function cariDataPerhitungan($f)
   {
     $this->db->where('tanggal', urldecode($f));

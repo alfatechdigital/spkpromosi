@@ -611,4 +611,19 @@ class Admin extends CI_Controller
       redirect(base_url('Admin/' . $redir));
     }
   }
+
+  public function home()
+  {
+    if (empty($this->session->userdata('nama'))) {
+      redirect('Autentifikasi/index_login');
+    } else {
+      $data['topbar'] = 'home';
+      $data['title'] = "Home";
+      $this->load->view('templates/header', $data);
+      $this->load->view('templates/sidebar_admin', $data);
+      $this->load->view('templates/topbar_admin', $data);
+      $this->load->view('admin/home', $data); // pastikan file home.php ada di views/admin/
+      $this->load->view('templates/footer');
+    }
+  }
 }
