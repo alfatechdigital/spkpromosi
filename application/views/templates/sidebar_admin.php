@@ -58,7 +58,7 @@
 <?php endif; ?>
 
 <!-- Contoh: PO hanya menu tertentu -->
-<?php if ($role == 'user'): ?>
+<?php if ($role == 'purchase'): ?>
    <li class="nav-item <?= ($topbar == 'index') ? 'active' : ''; ?>">
     <a class="nav-link" href="<?= base_url("Admin/index_produk"); ?>">
       <i class="fa-solid fa-bars"></i>
