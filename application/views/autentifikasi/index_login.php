@@ -52,7 +52,7 @@
         Swal.fire({
           icon: 'question',
           // title: 'Gagal Login!',
-          title: '<h1><b>Lupa Password?</b></h1><div class="alert alert-info"><h3><b>Hubungi pihak developer untuk pemulihan password!</b></h3><h4>Whatsapp : 0822-3709-9342<br>Email : davidluase17@gmail.com</h4></div>'
+          title: '<h1><b>Lupa Password?</b></h1><div class="alert alert-info"><h3><b>Hubungi pihak developer untuk pemulihan password!</b></h3><h4>Whatsapp : 0856-0864-6203<br>Email : mrla1884@gmail.com</h4></div>'
           // footer: '<a href="">Why do I have this issue?</a>'
         });
       }
